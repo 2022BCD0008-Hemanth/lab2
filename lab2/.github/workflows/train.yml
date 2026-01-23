@@ -7,22 +7,27 @@ on:
 jobs:
   train:
     runs-on: ubuntu-latest
+    outputs:
+      r2: ${{ steps.metrics.outputs.r2 }}
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
       - name: Install dependencies
-        run: |
-          pip install -r lab2/requirements.txt
+        run: pip install -r lab2/requirements.txt
 
       - name: Train model
+        run: python lab2/src/train.py
+
+      - name: Read metrics
+        id: metrics
         run: |
-          python lab2/src/train.py
+          r2=$(jq -r '.r2_score' lab2/outputs/results.json)
+          echo "r2=$r2" >> $GITHUB_OUTPUT
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
@@ -43,14 +48,10 @@ jobs:
           name: model-artifacts
           path: lab2/outputs/
 
-      - name: Read metrics
-        run: |
-          echo "R2=$(jq .r2_score lab2/outputs/results.json)" >> $GITHUB_ENV
-
       - name: Compare metrics
         run: |
-          if (( $(echo "$R2 <= ${{ vars.BEST_R2 }}" | bc -l) )); then
-            echo "2022BCD0008 ---- Metric did not improve"
+          if (( $(echo "${{ needs.train.outputs.r2 }} <= ${{ vars.BEST_R2 }}" | bc -l) )); then
+            echo "2022BCD0008_hemanth ---- Metric did not improve"
             exit 0
           fi
 

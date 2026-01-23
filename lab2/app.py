@@ -3,8 +3,8 @@ import joblib
 import numpy as np
 from pydantic import BaseModel
 
-model = joblib.load("outputs/model.pkl")
-scaler = joblib.load("outputs/scaler.pkl")
+model = joblib.load("lab2/outputs/model.pkl")
+scaler = joblib.load("lab2/outputs/scaler.pkl")
 
 app = FastAPI()
 
@@ -37,13 +37,11 @@ def predict(data: WineFeatures):
         data.alcohol
     ]])
 
-    # APPLY SAME PREPROCESSING
     features_scaled = scaler.transform(features)
     pred = model.predict(features_scaled)[0]
 
     return {
         "name": "Hemanth",
-        "roll_no": "2022Bcd0008_hemanth",
+        "roll_no": "2022BCD0008_hemanth",
         "wine_quality": int(round(pred))
     }
-    
