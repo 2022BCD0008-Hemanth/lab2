@@ -3,8 +3,8 @@ import joblib
 import numpy as np
 from pydantic import BaseModel
 
-model = joblib.load("lab2/outputs/model.pkl")
-scaler = joblib.load("lab2/outputs/scaler.pkl")
+model = joblib.load("outputs/model.pkl")
+scaler = joblib.load("outputs/scaler.pkl")
 
 app = FastAPI()
 
