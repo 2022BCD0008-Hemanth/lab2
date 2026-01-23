@@ -6,7 +6,8 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY app.py .
-COPY outputs/model.pkl ./outputs/model.pkl
+COPY outputs/model.pkl outputs/model.pkl
+COPY outputs/scaler.pkl outputs/scaler.pkl
 
 EXPOSE 8000
 
