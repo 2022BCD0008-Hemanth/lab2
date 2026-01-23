@@ -3,6 +3,7 @@ name: ML CI/CD Pipeline
 on:
   push:
     branches: [ "main" ]
+
 jobs:
   train:
     runs-on: ubuntu-latest
@@ -10,10 +11,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: "3.11"
 
       - name: Install dependencies
         run: |
@@ -57,7 +58,7 @@ jobs:
         run: |
           echo "${{ secrets.DOCKER_TOKEN }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
-      - name: Build & Push Image
+      - name: Build and Push Image
         run: |
           docker build -t hemanth251/wine_predict_2022bcd0008:latest lab2
           docker push hemanth251/wine_predict_2022bcd0008:latest
