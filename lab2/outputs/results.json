@@ -1,0 +1,12 @@
+{
+    "roll_no": "2022BCD0008_hemanth",
+    "model": "Random Forest Regressor (100 trees)",
+    "selected_features": [
+        "volatile acidity",
+        "citric acid",
+        "sulphates",
+        "alcohol"
+    ],
+    "mse": 0.3475739373405612,
+    "r2_score": 0.46813952414600535
+}
