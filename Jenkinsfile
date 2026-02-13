@@ -19,16 +19,17 @@ pipeline {
             }
         }
 
-        stage('Run Application') {
-            steps {
-                dir('lab2') {
-                    sh '''
-                    . venv/bin/activate
-                    python app.py
-                    '''
-                }
-            }
+        stage('Test Python Setup') {
+    steps {
+        dir('lab2') {
+            sh '''
+            . venv/bin/activate
+            python --version
+            '''
         }
+    }
+}
+
 
         stage('Build Docker Image') {
             steps {
