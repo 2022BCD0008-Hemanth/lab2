@@ -7,13 +7,6 @@ pipeline {
 
     stages {
 
-        stage('Checkout') {
-            steps {
-                git credentialsId: 'git-creds',
-                url: 'https://github.com/2022BCD0008-Hemanth/lab2.git'
-            }
-        }
-
         stage('Setup Python Environment') {
             steps {
                 dir('lab2') {
