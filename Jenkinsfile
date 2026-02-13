@@ -35,7 +35,7 @@ pipeline {
             steps {
                 dir('lab2') {
                     script {
-                        docker.withRegistry('', 'dockerhub-creds') {
+                        docker.withRegistry('', 'Docker_hub') {
                             def app = docker.build("${DOCKER_IMAGE}:${BUILD_NUMBER}")
                             app.push()
                             app.push("latest")
