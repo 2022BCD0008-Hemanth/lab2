@@ -2,10 +2,12 @@ from fastapi import FastAPI
 import joblib
 import numpy as np
 from pydantic import BaseModel
+import os
 
-model = joblib.load("outputs/model.pkl")
-scaler = joblib.load("outputs/scaler.pkl")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
+model = joblib.load(os.path.join(BASE_DIR, "outputs", "model.pkl"))
+scaler = joblib.load(os.path.join(BASE_DIR, "outputs", "scaler.pkl"))
 app = FastAPI()
 
 @app.get("/health")
