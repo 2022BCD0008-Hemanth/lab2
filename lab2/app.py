@@ -8,11 +8,15 @@ scaler = joblib.load("outputs/scaler.pkl")
 
 app = FastAPI()
 
+@app.get("/health")
+def health():
+    return {"status": "ok"}
+
 class WineFeatures(BaseModel):
     fixed_acidity: float
     volatile_acidity: float
     citric_acid: float
-    residual_sugar: float
+    residual_sugar: float   
     chlorides: float
     free_sulfur_dioxide: float
     total_sulfur_dioxide: float
