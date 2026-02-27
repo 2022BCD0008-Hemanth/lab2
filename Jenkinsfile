@@ -35,7 +35,7 @@ pipeline {
             steps {
                 script {
                     def health = sh(
-                        script: "curl -s http://localhost:8000/health",
+                        script: "curl -s http://host.docker.internal:8000/health",
                         returnStdout: true
                     ).trim()
 
@@ -52,7 +52,7 @@ pipeline {
             steps {
                 script {
                     def response = sh(
-                        script: "curl -s -X POST http://localhost:8000/predict -H 'Content-Type: application/json' -d @test_valid.json",
+                        script: "curl -s -X POST  http://host.docker.internal:8000/predict -H 'Content-Type: application/json' -d @test_valid.json",
                         returnStdout: true
                     ).trim()
 
@@ -69,7 +69,7 @@ pipeline {
             steps {
                 script {
                     def response = sh(
-                        script: "curl -s -X POST http://localhost:8000/predict -H 'Content-Type: application/json' -d @test_invalid.json",
+                        script: "curl -s -X POST  http://host.docker.internal:8000/predict -H 'Content-Type: application/json' -d @test_invalid.json",
                         returnStdout: true
                     ).trim()
 
