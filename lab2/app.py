@@ -8,8 +8,10 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 model = joblib.load(os.path.join(BASE_DIR, "outputs", "model.pkl"))
 scaler = joblib.load(os.path.join(BASE_DIR, "outputs", "scaler.pkl"))
+
 app = FastAPI()
 
+# health endpoint for Jenkins
 @app.get("/health")
 def health():
     return {"status": "ok"}
@@ -18,7 +20,7 @@ class WineFeatures(BaseModel):
     fixed_acidity: float
     volatile_acidity: float
     citric_acid: float
-    residual_sugar: float   
+    residual_sugar: float
     chlorides: float
     free_sulfur_dioxide: float
     total_sulfur_dioxide: float
