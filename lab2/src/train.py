@@ -5,11 +5,12 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, r2_score
+import os
+os.makedirs("outputs", exist_ok=True)
 
 ROLL_NO = "2022BCD0008_hemanth"
-MODEL_NAME = "Linear Regression + Standardization"
-
-df = pd.read_csv("lab2/data/winequality-red.csv")
+MODEL_NAME = "Linear Regression + Standardization" 
+df = pd.read_csv("data/winequality-red.csv")
 
 X = df.drop("quality", axis=1)
 y = df["quality"]
@@ -34,10 +35,10 @@ print("Model:", MODEL_NAME)
 print("MSE:", mse)
 print("R²:", r2)
 
-joblib.dump(model, "lab2/outputs/model.pkl")
-joblib.dump(scaler, "lab2/outputs/scaler.pkl")
+joblib.dump(model, "outputs/model.pkl")
+joblib.dump(scaler, "outputs/scaler.pkl")
 
-with open("lab2/outputs/results.json", "w") as f:
+with open("outputs/results.json", "w") as f:
     json.dump({
         "roll_no": ROLL_NO,
         "model": MODEL_NAME,
